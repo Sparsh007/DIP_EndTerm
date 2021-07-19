@@ -47,16 +47,17 @@ if Operation == "NOT":
 
 """**Q2.** Remove Salt and Pepper noise in the below image."""
 
-def main():   
+def main():   #Function defination
     
-    img3 = cv2.imread('dip3.png')
-    img3 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    plt.imshow(img3)
-    rows, cols, chan = img3.shape
+    img = cv2.imread("/content/dip3.png")
+    #img = cv2.imread("/content/peppers_color.tif")
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.imshow(img)
+    rows, cols, chan = img.shape
     #rows, cols= img.shape
     p = 0.25
 
-    output = np.zeros(img3.shape, np.uint8)
+    output = np.zeros(img.shape, np.uint8)
 
     for i in range(rows):
       for j in range(cols):
@@ -68,11 +69,11 @@ def main():
           # salt sprinkled 
           output[i][j] = [255,255,255]
         else:
-          output[i][j] = img3[i][j]
+          output[i][j] = img[i][j]
     
     denoised = cv2.medianBlur(output, 5)
 
-    result = [img3, output, denoised]
+    result = [img, output, denoised]
     titles = [ 'Original', 'Noisy', 'Denoised']
 
     for i in range(3):
@@ -81,9 +82,7 @@ def main():
       plt.title(titles[i])
       plt.xticks([])
       plt.yticks([])
-    
-    #plt.show()
-    print(img3.shape)
+    plt.show()
 
-if __name__ == "_main_":
-    main()
+if __name__ == "__main__":
+    main()   # calling
